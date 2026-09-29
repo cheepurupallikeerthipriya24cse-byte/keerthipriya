@@ -1,0 +1,29 @@
+import sys
+
+def main():
+    input_data = sys.stdin.read().split()
+    if not input_data:
+        return
+    i = int(input_data[0])
+    j = int(input_data[1])
+    start, end = min(i, j), max(i, j)
+    cache = {1: 1}
+    max_cycle_length = 0
+    for n in range(start, end + 1):
+        curr = n
+        path = []
+        while curr not in cache:
+            path.append(curr)
+            if curr % 2 == 0:
+                curr //= 2
+            else:
+                curr = 3 * curr + 1
+        base_length = cache[curr]
+        for idx, element in enumerate(reversed(path)):
+            cache[element] = base_length + idx + 1
+        if cache[n] > max_cycle_length:
+            max_cycle_length = cache[n]
+    print(f"{i} {j} {max_cycle_length}")
+
+if __name__ == "__main__":
+    main()
