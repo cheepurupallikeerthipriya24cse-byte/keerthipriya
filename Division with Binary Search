@@ -1,0 +1,48 @@
+import sys
+
+def divide_using_binary_search():
+    try:
+        line = sys.stdin.read().split()
+        if not line:
+            return
+        x = float(line[0])
+        y = float(line[1])
+    except (IndexError, ValueError):
+        return
+
+    if y == 0:
+        if x == 0:
+            print("NaN")
+        else:
+            print("Infinity" if x > 0 else "-Infinity")
+        return
+
+    sign = 1 if (x > 0) == (y > 0) else -1
+    abs_x = abs(x)
+    abs_y = abs(y)
+
+    low = 0.0
+    high = max(abs_x, 1.0)
+    epsilon = 1e-9
+
+    while (high - low) > epsilon:
+        mid = (low + high) / 2.0
+        current_product = abs_y * mid
+
+        if abs(current_product - abs_x) < epsilon:
+            low = mid
+            break
+        elif current_product < abs_x:
+            low = mid
+        else:
+            high = mid
+
+    final_result = sign * low
+
+    if final_result.is_integer():
+        print(int(final_result))
+    else:
+        print(final_result)
+
+if __name__ == "__main__":
+    divide_using_binary_search()
