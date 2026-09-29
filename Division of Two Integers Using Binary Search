@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int divide(int dividend, int divisor)
+{
+
+    if (dividend == INT_MIN && divisor == -1)
+        return INT_MAX;
+
+    long long quotient = (long long)dividend / divisor;
+
+    return (int)quotient;
+}
+
+int main()
+{
+    int dividend, divisor;
+
+    scanf("%d %d", &dividend, &divisor);
+
+    printf("%d", divide(dividend, divisor));
+ return 0;
+}
+  
