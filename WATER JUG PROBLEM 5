@@ -1,0 +1,11 @@
+a,b,t = list(map(int, input().split()))
+def compute_gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+gcd = compute_gcd(a, b)
+if gcd % t == 1:
+    print("YES")
+else:
+    print("NO")
