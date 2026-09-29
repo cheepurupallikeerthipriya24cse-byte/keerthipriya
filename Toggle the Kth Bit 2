@@ -1,0 +1,4 @@
+n, k = map(int, input().split())
+mask = 1 << k
+result = n ^ mask
+print(result)
